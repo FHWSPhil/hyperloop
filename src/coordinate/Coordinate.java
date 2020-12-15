@@ -1,4 +1,4 @@
-package hyperloop;
+package coordinate;
 
 public class Coordinate {
 	private long id;
