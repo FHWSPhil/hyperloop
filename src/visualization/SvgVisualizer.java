@@ -10,13 +10,24 @@ import coordinate.CoordinateReader;
 
 public class SvgVisualizer {
 	
+	/**
+	 * The main algorithm to visualize the computed line of the HyperLoop in SVG.
+	 * The program is limited to a List of coordinates that contains the same Latitude and Longitude numbers before the decimal point.
+	 * The accuracy of the program is four decimal places of the Latitude and Longitude.
+	 * @param start StartCoordinate of computed line.
+	 * @param end EndCoordinate of computed line.
+	 * @param coordinates List of all coordinates.
+	 * @throws IOException
+	 */
 	public static void visualizeWithHTML(Coordinate start, Coordinate end, List<Coordinate> coordinates) throws IOException {
+		double lon = CoordinateReader.findLon(coordinates);
+		double lat = CoordinateReader.findLat(coordinates);
 		
 		String svgFile = "Svg_Visualization.html";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(svgFile));
 			
+		//Create html-svg with a good scaling.
 		bw.write("<html> \n <body> \n");
-		
 		bw.write("<svg width=\"5000\" height=\"5000\" xmlns=\"http://www.w3.org/2000/svg\" viewBox= \"0 0 10000 10000\" style=\"transform: scale(1,-1)\">\n");
 		
 		//Triangle as marker of Coordinate-Axis-End
@@ -28,40 +39,40 @@ public class SvgVisualizer {
 		bw.write("<line x1=\"0\" y1=\"0\" x2=\"9940\" y2=\"0\" marker-end=\"url(#triangle)\" stroke=\"black\" stroke-width=\"20\"/>\n");
 		//Description of x-Axis
 		bw.write("<circle cx=\"10000\" cy=\"0\" r=\"40\" stroke=\"black\" stroke-width=\"20\" fill=\"none\" />\n");
-		bw.write("<text x=\"9300\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + 53 + " Lat: " + 13 + "</text>\n");
+		bw.write("<text x=\"9300\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + (lon+1) + " Lat: " + lat + "</text>\n");
 		
 		//yAxis
 		bw.write("<line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"9940\" marker-end=\"url(#triangle)\" stroke=\"black\" stroke-width=\"20\"/>\n");
 		//Description of y-Axis
 		bw.write("<circle cx=\"0\" cy=\"10000\" r=\"40\" stroke=\"black\" stroke-width=\"20\" fill=\"none\" />\n");
-		bw.write("<text x=\"40\" y=\"-9900\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + 52 + " Lat: " + 14 + "</text>\n");
+		bw.write("<text x=\"40\" y=\"-9900\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + (lat+1) + "</text>\n");
 		
 		//Description of 0-Point
 		bw.write("<circle cx=\"0\" cy=\"0\" r=\"40\" stroke=\"black\" stroke-width=\"20\" fill=\"none\" />\n");
-		bw.write("<text x=\"40\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + 52 + " Lat: " + 13 + "</text>\n");
+		bw.write("<text x=\"40\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + lat + "</text>\n");
 		
 		//ledger lines for coordinate system
-		double lon = round(52 + 0.01, 2);
-		double lat = round(13 + 0.01, 2);
+		double lonInfo = round(lon + 0.01, 2);
+		double latInfo = round(lat + 0.01, 2);
 		for(int i = 100; i <= 10000; i+=100) {
 
 			bw.write("<line x1=\"" + i + "\" y1=\"0\" x2=\"" + i + "\" y2=\"10000\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
 			bw.write("<text x=\"" + (i-15) + "\" y=\"-10\" transform=\"scale(1, -1)\" "
-					+ "font-size=\"6\" text-anchor=\"middle\"> Lon: " + lon + "</text>\n");
-			lon = round(lon+0.01, 2);
+					+ "font-size=\"6\" text-anchor=\"middle\"> Lon: " + lonInfo + "</text>\n");
+			lonInfo = round(lonInfo+0.01, 2);
 			
 			bw.write("<line x1=\"0\" y1=\"" + i + "\" x2=\"10000\" y2=\"" + i + "\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
 			bw.write("<text x=\"25\" y=\"" + -(i-5) + "\" transform=\"scale(1, -1)\" "
-					+ "font-size=\"6\" text-anchor=\"middle\"> Lat: " + lat + "</text>\n");
-			lat = round(lat+0.01, 2);
+					+ "font-size=\"6\" text-anchor=\"middle\"> Lat: " + latInfo + "</text>\n");
+			latInfo = round(latInfo+0.01, 2);
 		}
 		
 		
 
 		//Stations
 		for(Coordinate coordinate : coordinates) {
-			int x = (int) ((coordinate.getX()-52)*10000);
-			int y = (int) ((coordinate.getY()-13)*10000);
+			int x = (int) ((coordinate.getX()-lon)*10000);
+			int y = (int) ((coordinate.getY()-lat)*10000);
 			
 			bw.write("<g id=\"" + coordinate.getId() + "\">\n");
 			bw.write("<circle cx=\"" + x + "\" cy=\"" + y + "\" r=\"10\" stroke=\"black\" stroke-width=\"1\" fill=\"yellow\" /> \n");
@@ -82,8 +93,8 @@ public class SvgVisualizer {
 		bw.close();
 	}
 	
-	//rounding doubles for display of ledger lines
-	private static double round (double value, int precision) {
+	//rounding doubles for display of ledger lines Source: https://stackoverflow.com/questions/22186778/using-math-round-to-round-to-one-decimal-place
+	public static double round (double value, int precision) {
 	    int scale = (int) Math.pow(10, precision);
 	    return (double) Math.round(value * scale) / scale;
 	}

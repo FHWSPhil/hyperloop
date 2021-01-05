@@ -45,6 +45,18 @@ public class CoordinateReader {
 		return coordinates;
 	}
 	
+	//find the lat-Coordinate of all coordinates
+	public static double findLat(List<Coordinate> coordinates) {
+		if(coordinates.isEmpty()) throw new IllegalStateException("List is Empty!");
+		return (double) ((int) coordinates.get(0).getY());
+	}
+
+	//find the lon-Coordinate of all coordinates
+	public static double findLon(List<Coordinate> coordinates) {
+		if(coordinates.isEmpty()) throw new IllegalStateException("List is Empty!");
+		return (double) ((int) coordinates.get(0).getX());
+	}
+	
 	//for testing
 	public static void main(String[] args) throws IOException {
 		List<Coordinate> coordinates = readCoordinates("vbb_neo4j.csv");
