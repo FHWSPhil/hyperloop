@@ -60,6 +60,7 @@ public class CoordinateReader {
 	}
 	
 	//for testing
+	//TODO Comment this, when project is final.
 	public static void main(String[] args) throws IOException {
 		List<Coordinate> coordinates = readCoordinates("vbb_neo4j.csv");
 		

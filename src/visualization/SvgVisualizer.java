@@ -101,6 +101,7 @@ public class SvgVisualizer {
 	}
 	
 	//testing
+	//TODO Comment this, when project is final.
 	public static void main(String[] args) throws IOException {
 		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
 		Coordinate end = new Coordinate(2, "End", "EndDistrict", 10000, 10000);
