@@ -14,6 +14,7 @@ public class SvgVisualizer {
 	 * The main algorithm to visualize the computed line of the HyperLoop in SVG.
 	 * The program is limited to a List of coordinates that contains the same Latitude and Longitude numbers before the decimal point.
 	 * The accuracy of the program is four decimal places of the Latitude and Longitude.
+	 * Developed for public transport stations of Berlin.
 	 * @param start StartCoordinate of computed line.
 	 * @param end EndCoordinate of computed line.
 	 * @param coordinates List of all coordinates.

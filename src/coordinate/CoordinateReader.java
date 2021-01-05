@@ -48,12 +48,14 @@ public class CoordinateReader {
 	//find the lat-Coordinate of all coordinates
 	public static double findLat(List<Coordinate> coordinates) {
 		if(coordinates.isEmpty()) throw new IllegalStateException("List is Empty!");
+		//The program is limited to a List of coordinates that contains the same Latitude and Longitude numbers before the decimal point.
 		return (double) ((int) coordinates.get(0).getY());
 	}
 
 	//find the lon-Coordinate of all coordinates
 	public static double findLon(List<Coordinate> coordinates) {
 		if(coordinates.isEmpty()) throw new IllegalStateException("List is Empty!");
+		//The program is limited to a List of coordinates that contains the same Latitude and Longitude numbers before the decimal point.
 		return (double) ((int) coordinates.get(0).getX());
 	}
 	
