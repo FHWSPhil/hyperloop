@@ -23,13 +23,13 @@ public class SvgVisualizerWithPrecision {
 	 */
 	public static void visualizeWithHTML(Coordinate start, Coordinate end, List<Coordinate> coordinates, int precision) throws IOException {
 		if(precision < 4 || precision > 6) throw new IllegalArgumentException("Precission must be between 4 and 6 to work with Lon. and Lat. correctly!");
+		String svgFile = "Svg_Visualization_With_Precision_" + precision + ".html";
+		BufferedWriter bw = new BufferedWriter(new FileWriter(svgFile));
+		
 		precision = (int) Math.pow(10, precision);
 		
 		double lon = CoordinateReader.findLon(coordinates);
 		double lat = CoordinateReader.findLat(coordinates);
-		
-		String svgFile = "Svg_Visualization.html";
-		BufferedWriter bw = new BufferedWriter(new FileWriter(svgFile));
 			
 		//Create html-svg with a good scaling.
 		bw.write("<html> \n <body> \n");
