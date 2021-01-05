@@ -42,6 +42,8 @@ public class CoordinateReader {
 		
 		br.close();
 		
+		System.out.println("Coordinates read from \"" + fileName + "\"!");
+		
 		return coordinates;
 	}
 	

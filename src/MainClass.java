@@ -12,7 +12,7 @@ public class MainClass {
 	public static void main(String[] args) throws IOException {
 		//Read Coordinates/Points:
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
-
+		System.out.println();
 		
 		//Calculate OptimalTrack
     	double tolerance = 0.005; 
