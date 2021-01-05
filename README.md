@@ -1,3 +1,5 @@
 # hyperloop
 
+Update-History:
 1. Implementation of a CoordinateReader to read coordinates out of  the .csv
+2. Implementation of SVG-Visualizator
