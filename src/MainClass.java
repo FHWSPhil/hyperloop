@@ -6,6 +6,7 @@ import coordinate.CoordinateReader;
 import hyperloop.Track;
 import hyperloop.TrackFinder;
 import visualization.SvgVisualizer;
+import visualization.SvgVisualizerWithPrecision;
 
 public class MainClass {
 	public static void main(String[] args) throws IOException {
@@ -31,6 +32,11 @@ public class MainClass {
         System.out.println();
         
         //Visualize
-        SvgVisualizer.visualizeWithHTML(pointsOfOrigin.get(0), pointsOfOrigin.get(1), coordinates);
+        Coordinate start = pointsOfOrigin.get(0);
+        Coordinate end = pointsOfOrigin.get(1);
+        SvgVisualizer.visualizeWithHTML(start, end, coordinates);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, 4);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, 5);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, 6);
 	}
 }
