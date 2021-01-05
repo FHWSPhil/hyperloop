@@ -129,11 +129,17 @@ public class SvgVisualizerWithPrecision {
 	//testing
 	//TODO Comment this, when project is final.
 	public static void main(String[] args) throws IOException {
-		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
-		Coordinate end = new Coordinate(2, "End", "EndDistrict", 10000, 10000);
 		
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
 		
+		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
+		Coordinate end = new Coordinate(2, "End", "EndDistrict", 10000, 10000);
 		visualizeWithHTML(start, end, coordinates, 4);
+		start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
+		end = new Coordinate(2, "End", "EndDistrict", 100000, 100000);
+		visualizeWithHTML(start, end, coordinates, 5);
+		start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
+		end = new Coordinate(2, "End", "EndDistrict", 1000000, 1000000);
+		visualizeWithHTML(start, end, coordinates, 6);
 	}
 }
