@@ -41,9 +41,19 @@ public class SvgVisualizer {
 		bw.write("<text x=\"40\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + 52 + " Lat: " + 13 + "</text>\n");
 		
 		//ledger lines for coordinate system
+		double lon = round(52 + 0.01, 2);
+		double lat = round(13 + 0.01, 2);
 		for(int i = 100; i <= 10000; i+=100) {
+
 			bw.write("<line x1=\"" + i + "\" y1=\"0\" x2=\"" + i + "\" y2=\"10000\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
+			bw.write("<text x=\"" + (i-15) + "\" y=\"-10\" transform=\"scale(1, -1)\" "
+					+ "font-size=\"6\" text-anchor=\"middle\"> Lon: " + lon + "</text>\n");
+			lon = round(lon+0.01, 2);
+			
 			bw.write("<line x1=\"0\" y1=\"" + i + "\" x2=\"10000\" y2=\"" + i + "\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
+			bw.write("<text x=\"25\" y=\"" + -(i-5) + "\" transform=\"scale(1, -1)\" "
+					+ "font-size=\"6\" text-anchor=\"middle\"> Lat: " + lat + "</text>\n");
+			lat = round(lat+0.01, 2);
 		}
 		
 		
@@ -70,6 +80,12 @@ public class SvgVisualizer {
 		bw.write("</svg> \n </body> \n </html>");
 		
 		bw.close();
+	}
+	
+	//rounding doubles for display of ledger lines
+	private static double round (double value, int precision) {
+	    int scale = (int) Math.pow(10, precision);
+	    return (double) Math.round(value * scale) / scale;
 	}
 	
 	//testing
