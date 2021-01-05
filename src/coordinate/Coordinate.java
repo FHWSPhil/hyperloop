@@ -78,6 +78,17 @@ public class Coordinate {
 	
 	@Override
 	public String toString() {
-		return getId() + "," + getStationName() + "," + getDistrict() + "," + getX() + "," + getY();
+		return "(" + getId() + ") \"" + getStationName() + "\"" + toStringCoordinatesOnly();
+	}
+	
+	public String toStringCoordinatesOnly() {
+		return "[" + getX() + "|" + getY() + "]";
+	}
+	
+	public String toSvgString(double xCoordinate) {
+		return "<tspan x=\"" + xCoordinate + "\" dy=\"0em\">(" + getId() + ")</tspan>" //
+				+ "<tspan x=\"" + xCoordinate + "\" dy=\"1.2em\">\"" + getStationName() + "\"</tspan>" //
+				+ "<tspan x=\"" + xCoordinate + "\" dy=\"1.2em\">\"" + getDistrict() + "\"</tspan>" //
+				+ "<tspan x=\"" + xCoordinate + "\" dy=\"1.2em\">\"" + toStringCoordinatesOnly() + "\"</tspan>";
 	}
 }

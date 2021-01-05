@@ -83,23 +83,26 @@ public class SvgVisualizerWithPrecision {
 			bw.write("<g id=\"" + coordinate.getId() + "\">\n");
 			bw.write("<circle cx=\"" + x + "\" cy=\"" + y + "\" r=\"" + scaleNumber(10, precision) + "\" stroke=\"black\" stroke-width=\"1\" fill=\"yellow\" /> \n");
 			
-			bw.write("<text x=\"" + x + "\" y=\"" + -(y-10) + "\" transform=\"scale(1, -1)\" "
-					+ "font-size=\"" + scaleNumber(6, precision) + "\" text-anchor=\"middle\">" + coordinate.getStationName() + "</text>\n");
+			bw.write("<text x=\"" + x + "\" y=\"" + -(y+10) + "\" transform=\"scale(1, -1)\" "
+					+ "font-size=\"" + scaleNumber(6, precision) + "\" text-anchor=\"middle\">" + coordinate.toSvgString(x) + "</text>\n");
 			bw.write("</g>\n");
 		}
 		
 		
 		//Hyperloop-Path
-//		bw.write("<line x1=\"" + start.scaleXToCoordinateSystem(lon, precision) + "\" y1=\"" + start.scaleYToCoordinateSystem(lat, precision) //
-//				+ "\" x2=\"" + end.scaleXToCoordinateSystem(lon, precision) + "\" y2=\"" + end.scaleYToCoordinateSystem(lat, precision) //
-//				+ "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /> \n");
-		bw.write("<line x1=\"" + start.getX() + "\" y1=\"" + start.getY() //
-		+ "\" x2=\"" + end.getX() + "\" y2=\"" + end.getY() //
-		+ "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /> \n");
-		
+		double startX = start.scaleXToCoordinateSystem(lon, precision);
+		double startY = start.scaleYToCoordinateSystem(lat, precision);
+		double endX = end.scaleXToCoordinateSystem(lon, precision);
+		double endY = end.scaleYToCoordinateSystem(lat, precision);
+		bw.write("<line x1=\"" + startX + "\" y1=\"" + startY //
+				+ "\" x2=\"" + endX + "\" y2=\"" + endY //
+				+ "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /> \n");
+				
 		bw.write("</svg> \n </body> \n </html>");
 		
 		bw.close();
+				
+		System.out.println("HTML-SVG has been written to \"" + svgFile + "\"!");
 	}
 	
 	//rounding doubles for display of ledger lines Source: https://stackoverflow.com/questions/22186778/using-math-round-to-round-to-one-decimal-place
@@ -132,14 +135,14 @@ public class SvgVisualizerWithPrecision {
 		
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
 		
-		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
-		Coordinate end = new Coordinate(2, "End", "EndDistrict", 10000, 10000);
+		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
 		visualizeWithHTML(start, end, coordinates, 4);
-		start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
-		end = new Coordinate(2, "End", "EndDistrict", 100000, 100000);
+		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+		end = new Coordinate(2, "End", "EndDistrict", 52.99999, 13.99999);
 		visualizeWithHTML(start, end, coordinates, 5);
-		start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
-		end = new Coordinate(2, "End", "EndDistrict", 1000000, 1000000);
+		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+		end = new Coordinate(2, "End", "EndDistrict", 152.999999, 13.999999);
 		visualizeWithHTML(start, end, coordinates, 6);
 	}
 }

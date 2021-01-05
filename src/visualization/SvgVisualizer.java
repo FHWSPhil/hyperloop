@@ -72,26 +72,32 @@ public class SvgVisualizer {
 
 		//Stations
 		for(Coordinate coordinate : coordinates) {
-			int x = (int) ((coordinate.getX()-lon)*10000);
-			int y = (int) ((coordinate.getY()-lat)*10000);
+			int x = coordinate.scaleXToCoordinateSystem(lon, 10000);
+			int y = coordinate.scaleYToCoordinateSystem(lat, 10000);
 			
 			bw.write("<g id=\"" + coordinate.getId() + "\">\n");
 			bw.write("<circle cx=\"" + x + "\" cy=\"" + y + "\" r=\"10\" stroke=\"black\" stroke-width=\"1\" fill=\"yellow\" /> \n");
 			
-			bw.write("<text x=\"" + x + "\" y=\"" + -(y-10) + "\" transform=\"scale(1, -1)\" "
-					+ "font-size=\"6\" text-anchor=\"middle\">" + coordinate.getStationName() + "</text>\n");
+			bw.write("<text x=\"" + x + "\" y=\"" + -(y+10) + "\" transform=\"scale(1, -1)\" "
+					+ "font-size=\"6\" text-anchor=\"middle\">" + coordinate.toSvgString(x) + "</text>\n");
 			bw.write("</g>\n");
 		}
 		
 		
 		//Hyperloop-Path
-		bw.write("<line x1=\"" + start.getX() + "\" y1=\"" + start.getY() //
-				+ "\" x2=\"" + end.getX() + "\" y2=\"" + end.getY() //
+		double startX = start.scaleXToCoordinateSystem(lon, 10000);
+		double startY = start.scaleYToCoordinateSystem(lat, 10000);
+		double endX = end.scaleXToCoordinateSystem(lon, 10000);
+		double endY = end.scaleYToCoordinateSystem(lat, 10000);
+		bw.write("<line x1=\"" + startX + "\" y1=\"" + startY //
+				+ "\" x2=\"" + endX + "\" y2=\"" + endY //
 				+ "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" /> \n");
 		
 		bw.write("</svg> \n </body> \n </html>");
 		
 		bw.close();
+		
+		System.out.println("HTML-SVG has been written to \"" + svgFile + "\"!");
 	}
 	
 	//rounding doubles for display of ledger lines Source: https://stackoverflow.com/questions/22186778/using-math-round-to-round-to-one-decimal-place
@@ -103,8 +109,8 @@ public class SvgVisualizer {
 	//testing
 	//TODO Comment this, when project is final.
 	public static void main(String[] args) throws IOException {
-		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 0, 0);
-		Coordinate end = new Coordinate(2, "End", "EndDistrict", 10000, 10000);
+		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
 		
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
 		
