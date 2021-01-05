@@ -8,6 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CoordinateReader {
+	
+	/**
+	 * 
+	 * @param fileName Must be a .csv-File with the values {ID,"StationName","District","Lat","Long"} in order to be read right.
+	 * @return A list of coordinates with the given values.
+	 * @throws IOException If .csv-File not found.
+	 */
 	public static List<Coordinate> readCoordinates(String fileName) throws IOException {
 		List<Coordinate> coordinates = new LinkedList<>();
 		
