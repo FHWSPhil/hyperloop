@@ -56,6 +56,26 @@ public class Coordinate {
 		this.y = y;
 	}
 	
+	/**
+	 * 
+	 * @param lon Get lon from CoordinateReader.
+	 * @param precision (10^n)
+	 * @return X in CoordinateSystem.
+	 */
+	public int scaleXToCoordinateSystem(double lon, int precision) {
+		return (int) ((this.getX()-lon) * precision);
+	}
+	
+	/**
+	 * 
+	 * @param lat Get lat from CoordinateReader
+	 * @param precision (10^n)
+	 * @return Y in CoortdinateSystem.
+	 */
+	public int scaleYToCoordinateSystem(double lat, int precision) {
+		return (int) ((this.getY()-lat) * precision);
+	}
+	
 	@Override
 	public String toString() {
 		return getId() + "," + getStationName() + "," + getDistrict() + "," + getX() + "," + getY();
