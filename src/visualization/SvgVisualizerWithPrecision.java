@@ -12,7 +12,7 @@ public class SvgVisualizerWithPrecision {
 	/**
 	 * The main algorithm to visualize the computed line of the HyperLoop in SVG.
 	 * The program is limited to a List of coordinates that contains the same Latitude and Longitude numbers before the decimal point.
-	 * The accuracy of the program is four decimal places of the Latitude and Longitude.
+	 * The accuracy of the program is @param precision places of the Latitude and Longitude.
 	 * Developed for public transport stations of Berlin.
 	 * Texts in the SVG have to be transformed because the whole Graph is mirrored on the x-Axis.
 	 * @param start StartCoordinate of computed line.
