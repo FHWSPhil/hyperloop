@@ -55,7 +55,7 @@ public class Line {
     }
     
     public double calculateDistance (Coordinate p1, Coordinate p2) {
-    	return Math.sqrt(Math.exp(p2.getX() - p1.getX())+ Math.exp(p2.getY() - p1.getY()));
+    	return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
     }
     
     public double getDistance() {
