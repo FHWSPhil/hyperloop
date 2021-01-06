@@ -90,23 +90,23 @@ public class SvgVisualizer {
 			
 			if (track.isOnTrack(coordinate,0.005)) {
 			
-			bw.write("<g id=\"" + coordinate.getId() + "\">\n");
-			bw.write("<circle cx=\"" + x + "\" cy=\"" + y
+				bw.write("<g id=\"" + coordinate.getId() + "\">\n");
+				bw.write("<circle cx=\"" + x + "\" cy=\"" + y
 					+ "\" r=\"10\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" /> \n");
 
-			bw.write("<text x=\"" + x + "\" y=\"" + -(y + 10) + "\" transform=\"scale(1, -1)\" "
+				bw.write("<text x=\"" + x + "\" y=\"" + -(y + 10) + "\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"6\" text-anchor=\"middle\">" + coordinate.toSvgString(x) + "</text>\n");
-			bw.write("</g>\n");
+				bw.write("</g>\n");
 			
-		} else {
-			bw.write("<g id=\"" + coordinate.getId() + "\">\n");
-			bw.write("<circle cx=\"" + x + "\" cy=\"" + y
+			} else {
+				bw.write("<g id=\"" + coordinate.getId() + "\">\n");
+				bw.write("<circle cx=\"" + x + "\" cy=\"" + y
 					+ "\" r=\"10\" stroke=\"black\" stroke-width=\"1\" fill=\"yellow\" /> \n");
 
-			bw.write("<text x=\"" + x + "\" y=\"" + -(y + 10) + "\" transform=\"scale(1, -1)\" "
+				bw.write("<text x=\"" + x + "\" y=\"" + -(y + 10) + "\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"6\" text-anchor=\"middle\">" + coordinate.toSvgString(x) + "</text>\n");
-			bw.write("</g>\n");
-		}
+				bw.write("</g>\n");
+			}
 		}
 
 		// Hyperloop-Path
