@@ -22,9 +22,10 @@ public class SvgVisualizer {
 	 * @param start       StartCoordinate of computed line.
 	 * @param end         EndCoordinate of computed line.
 	 * @param coordinates List of all coordinates.
+	 * @param tolerance   to mark Stations within the tolerance.
 	 * @throws IOException
 	 */
-	public static void visualizeWithHTML(Coordinate start, Coordinate end, List<Coordinate> coordinates)
+	public static void visualizeWithHTML(Coordinate start, Coordinate end, List<Coordinate> coordinates, double tolerance)
 			throws IOException {
 		double lon = CoordinateReader.findLon(coordinates);
 		double lat = CoordinateReader.findLat(coordinates);
@@ -88,7 +89,7 @@ public class SvgVisualizer {
 			int x = coordinate.scaleXToCoordinateSystem(lon, 10000);
 			int y = coordinate.scaleYToCoordinateSystem(lat, 10000);
 			
-			if (track.isOnTrack(coordinate,0.005)) {			
+			if (track.isOnTrack(coordinate, tolerance)) {			
 				bw.write("<g id=\"" + coordinate.getId() + "\">\n");
 				bw.write("<circle cx=\"" + x + "\" cy=\"" + y
 					+ "\" r=\"10\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" /> \n");
@@ -138,6 +139,6 @@ public class SvgVisualizer {
 
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
 
-		visualizeWithHTML(start, end, coordinates);
+		visualizeWithHTML(start, end, coordinates, 0.005);
 	}
 }

@@ -7,6 +7,8 @@ import java.util.List;
 
 import coordinate.Coordinate;
 import coordinate.CoordinateReader;
+import hyperloop.Line;
+import hyperloop.Track;
 
 public class SvgVisualizerWithPrecision {
 	/**
@@ -18,10 +20,11 @@ public class SvgVisualizerWithPrecision {
 	 * @param start StartCoordinate of computed line.
 	 * @param end EndCoordinate of computed line.
 	 * @param coordinates List of all coordinates.
+	 * @param tolerance   to mark Stations within the tolerance.
 	 * @param precision The precision of the numbers of decimal digits which have to be considered. Must be set between 4 and 6! Recommended is 4!
 	 * @throws IOException
 	 */
-	public static void visualizeWithHTML(Coordinate start, Coordinate end, List<Coordinate> coordinates, int precision) throws IOException {
+	public static void visualizeWithHTML(Coordinate start, Coordinate end, List<Coordinate> coordinates,double tolerance , int precision) throws IOException {
 		if(precision < 4 || precision > 6) throw new IllegalArgumentException("Precission must be between 4 and 6 to work with Lon. and Lat. correctly!");
 		String svgFile = "Svg_Visualization_With_Precision_" + precision + ".html";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(svgFile));
@@ -74,20 +77,31 @@ public class SvgVisualizerWithPrecision {
 		}
 		
 		
-
-		//Stations
-		for(Coordinate coordinate : coordinates) {
+		Track track = new Track(new Line(start, end));
+		
+		// Stations
+		for (Coordinate coordinate : coordinates) {
 			int x = coordinate.scaleXToCoordinateSystem(lon, precision);
 			int y = coordinate.scaleYToCoordinateSystem(lat, precision);
 			
-			bw.write("<g id=\"" + coordinate.getId() + "\">\n");
-			bw.write("<circle cx=\"" + x + "\" cy=\"" + y + "\" r=\"" + scaleNumber(10, precision) + "\" stroke=\"black\" stroke-width=\"1\" fill=\"yellow\" /> \n");
-			
-			bw.write("<text x=\"" + x + "\" y=\"" + -(y+10) + "\" transform=\"scale(1, -1)\" "
+			if (track.isOnTrack(coordinate, tolerance)) {			
+				bw.write("<g id=\"" + coordinate.getId() + "\">\n");
+				bw.write("<circle cx=\"" + x + "\" cy=\"" + y
+					+ "\" r=\"" + scaleNumber(10, precision) + "\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" /> \n");
+
+				bw.write("<text x=\"" + x + "\" y=\"" + -(y + 10) + "\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"" + scaleNumber(6, precision) + "\" text-anchor=\"middle\">" + coordinate.toSvgString(x) + "</text>\n");
-			bw.write("</g>\n");
+				bw.write("</g>\n");			
+			} else {
+				bw.write("<g id=\"" + coordinate.getId() + "\">\n");
+				bw.write("<circle cx=\"" + x + "\" cy=\"" + y
+					+ "\" r=\"" + scaleNumber(10, precision) + "\" stroke=\"black\" stroke-width=\"1\" fill=\"yellow\" /> \n");
+
+				bw.write("<text x=\"" + x + "\" y=\"" + -(y + 10) + "\" transform=\"scale(1, -1)\" "
+					+ "font-size=\"" + scaleNumber(6, precision) + "\" text-anchor=\"middle\">" + coordinate.toSvgString(x) + "</text>\n");
+				bw.write("</g>\n");
+			}
 		}
-		
 		
 		//Hyperloop-Path
 		double startX = start.scaleXToCoordinateSystem(lon, precision);
@@ -137,12 +151,12 @@ public class SvgVisualizerWithPrecision {
 		
 		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
 		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
-		visualizeWithHTML(start, end, coordinates, 4);
+		visualizeWithHTML(start, end, coordinates, 0.005, 4);
 		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
 		end = new Coordinate(2, "End", "EndDistrict", 52.99999, 13.99999);
-		visualizeWithHTML(start, end, coordinates, 5);
+		visualizeWithHTML(start, end, coordinates, 0.005, 5);
 		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
 		end = new Coordinate(2, "End", "EndDistrict", 152.999999, 13.999999);
-		visualizeWithHTML(start, end, coordinates, 6);
+		visualizeWithHTML(start, end, coordinates, 0.005, 6);
 	}
 }

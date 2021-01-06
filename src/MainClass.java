@@ -34,9 +34,9 @@ public class MainClass {
         //Visualize
         Coordinate start = pointsOfOrigin.get(0);
         Coordinate end = pointsOfOrigin.get(1);
-        SvgVisualizer.visualizeWithHTML(start, end, coordinates);
-        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, 4);
-        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, 5);
-        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, 6);
+        SvgVisualizer.visualizeWithHTML(start, end, coordinates, tolerance);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 4);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 5);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 6);
 	}
 }
