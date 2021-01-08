@@ -28,15 +28,15 @@ public class MainClass {
         
         System.out.println("Knoten auf der Geraden:");
         List<Coordinate> pointsOnOptimalTrack = optimalTrack.getPoints(); 
-        System.out.println(optimalTrack.getPoints());
+        System.out.println(pointsOnOptimalTrack);
         System.out.println();
         
         //Visualize
         Coordinate start = pointsOfOrigin.get(0);
         Coordinate end = pointsOfOrigin.get(1);
         SvgVisualizer.visualizeWithHTML(start, end, coordinates, tolerance);
-        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 4);
-        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 5);
-        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 6);
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 4); 
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 5); //(Experimental!!!)
+        SvgVisualizerWithPrecision.visualizeWithHTML(start, end, coordinates, tolerance, 6); //(Experimental!!!)
 	}
 }

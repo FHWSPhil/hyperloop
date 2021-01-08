@@ -34,8 +34,12 @@ public class SvgVisualizerWithPrecision {
 		double lon = CoordinateReader.findLon(coordinates);
 		double lat = CoordinateReader.findLat(coordinates);
 			
-		//Create html-svg with a good scaling.
-		bw.write("<html> \n <body> \n");
+		// Create HTML with stylesheet svg.css --> hover-effect
+		bw.write("<html> \n <head> \n");
+		bw.write("<link rel=\"stylesheet\" href=\"svg.css\"></head>\n");
+		bw.write("<body>\n");
+				
+		//Create svg with a good scaling.
 		bw.write("<svg width=\"" + precision/2 + "\" height=\"" + precision/2 + "\" xmlns=\"http://www.w3.org/2000/svg\" viewBox= \"0 0 " + precision + " " + precision +"\" style=\"transform: scale(1,-1)\">\n");
 		
 		//Triangle as marker of Coordinate-Axis-End

@@ -1,0 +1,9 @@
+svg text {
+	opacity:0;
+}
+
+
+svg g:hover text {
+	opacity:1;
+}
+

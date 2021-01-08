@@ -33,8 +33,12 @@ public class SvgVisualizer {
 		String svgFile = "Svg_Visualization.html";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(svgFile));
 
-		// Create html-svg with a good scaling.
-		bw.write("<html> \n <body> \n");
+		// Create HTML with stylesheet svg.css --> hover-effect
+		bw.write("<html> \n <head> \n");
+		bw.write("<link rel=\"stylesheet\" href=\"svg.css\"></head>\n");
+		bw.write("<body>\n");
+		
+		//Create svg with a good scaling.
 		bw.write(
 				"<svg width=\"5000\" height=\"5000\" xmlns=\"http://www.w3.org/2000/svg\" viewBox= \"0 0 10000 10000\" style=\"transform: scale(1,-1)\">\n");
 
