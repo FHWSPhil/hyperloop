@@ -13,7 +13,7 @@ public class MainClass {
 		//Read Coordinates/Points:
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
 		System.out.println();
-		//Test3
+		//test
 		//Calculate OptimalTrack
     	double tolerance = 0.005; 
 		Track optimalTrack = TrackFinder.findOptimalTrack(coordinates, tolerance);
