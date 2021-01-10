@@ -13,17 +13,17 @@ public class MainClass {
 		//Read Coordinates/Points:
 		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
 		System.out.println();
-		//test
+		
 		//Calculate OptimalTrack
     	double tolerance = 0.005; 
 		Track optimalTrack = TrackFinder.findOptimalTrack(coordinates, tolerance);
         System.out.println("Geradengleichung:");
-        System.out.println(optimalTrack.getTrack());
+        System.out.println(optimalTrack.getLine());
         System.out.println();
         
         System.out.println("Ursprungspunkte:");
-        List<Coordinate> pointsOfOrigin = optimalTrack.getTrack().getPointOfOrigin();
-        System.out.println(optimalTrack.getTrack().getPointOfOrigin());
+        List<Coordinate> pointsOfOrigin = optimalTrack.getLine().getPointOfOrigin();
+        System.out.println(optimalTrack.getLine().getPointOfOrigin());
         System.out.println();
         
         System.out.println("Knoten auf der Geraden:");

@@ -6,25 +6,26 @@ import java.util.Optional;
 
 import coordinate.Coordinate;
 
+
 public class Line {
-	private Coordinate point1;
-	private Coordinate point2;
+	private Coordinate firstOriginPoint;
+	private Coordinate secondOriginPoint;
     private final double slope;
     private final Optional<Double> yIntercept;
     private final Optional<Double> xIntercept;
-    private double distance;
-    
+   
     
 
     public Line(Coordinate p1, Coordinate p2){
-    	this.point1 = p1;
-    	this.point2 = p2;
+    	this.firstOriginPoint = p1;
+    	this.secondOriginPoint = p2;
         this.slope = calculateSlope(p1, p2);
         this.yIntercept = evaluateYIntercept(p1, this.slope);
         this.xIntercept = evaluateXIntercept(p1, this.slope);
-        this.distance = calculateDistance(p1, p2);
+       
     }
 
+    //slope formula
     private double calculateSlope(Coordinate p1, Coordinate p2){
         double slope = Double.POSITIVE_INFINITY;
         double diffX = Math.abs(p1.getX() - p2.getX());
@@ -33,42 +34,40 @@ public class Line {
         return slope;
     }
 
-    private Optional<Double> evaluateYIntercept(Coordinate p, double slope){
-        return (slope == Double.POSITIVE_INFINITY) ? Optional.empty() : Optional.of(p.getY() - slope * p.getX());
+    private Optional<Double> evaluateYIntercept(Coordinate p, double slope){   //calculate Y-Intercept, if the X-Difference are not equal to zero
+        return (slope == Double.POSITIVE_INFINITY) ? Optional.empty() : Optional.of(p.getY() - slope * p.getX()); 
     }
 
-    private Optional<Double> evaluateXIntercept(Coordinate p, double slope){
+    private Optional<Double> evaluateXIntercept(Coordinate p, double slope){ //if the straight line is parallel to the y-Axis
         return (slope == Double.POSITIVE_INFINITY) ? Optional.of(p.getX()) : Optional.empty();
     }
 
-    public int positionToLine(Coordinate p, double tolerance){
-        int position = -2;
-        if(yIntercept.isPresent()) {
-            double gY = this.slope * p.getX() + this.yIntercept.get();
-            position = (tolerance >= Math.abs((p.getY() - gY))) ? 0 : (p.getY() > gY) ? 1 : -1;
-           
-        }
-        else if(xIntercept.isPresent()){
-            position = (tolerance >= Math.abs((p.getX() - this.xIntercept.get()))) ? 0 : (p.getX() > this.xIntercept.get()) ? 1 : -1;
-        }
-        return position;
+    public Double getSlope(){
+    	return this.slope;
     }
     
-    public double calculateDistance (Coordinate p1, Coordinate p2) {
-    	return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
+    public Optional<Double> getYIntercept(){
+    	return this.yIntercept;
     }
     
-    public double getDistance() {
-    return this.distance;
+    public Optional<Double> getXIntercept(){
+    	return this.xIntercept;
     }
     
-    public List<Coordinate> getPointOfOrigin(){
+    public Coordinate getfirstPointofOrigin() {
+    	return this.firstOriginPoint;
+    }
+    
+    public Coordinate getSecondPointofOrigin() {
+    	return this.secondOriginPoint;
+    }
+    
+     public List<Coordinate> getPointOfOrigin(){
         List<Coordinate> points = new LinkedList<Coordinate>();
-        points.add(this.point1);
-        points.add(this.point2);
+        points.add(this.firstOriginPoint);
+        points.add(this.secondOriginPoint);
         return points;
     }
-    
     
     
     @Override
