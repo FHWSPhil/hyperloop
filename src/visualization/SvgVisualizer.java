@@ -51,7 +51,7 @@ public class SvgVisualizer {
 				"<line x1=\"0\" y1=\"0\" x2=\"9940\" y2=\"0\" marker-end=\"url(#triangle)\" stroke=\"black\" stroke-width=\"20\"/>\n");
 		// Description of x-Axis
 		bw.write("<circle cx=\"10000\" cy=\"0\" r=\"40\" stroke=\"black\" stroke-width=\"20\" fill=\"none\" />\n");
-		bw.write("<text x=\"9300\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + (lon + 1)
+		bw.write("<text class=\"NoHover\" x=\"9300\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + (lon + 1)
 				+ " Lat: " + lat + "</text>\n");
 
 		// yAxis
@@ -59,12 +59,12 @@ public class SvgVisualizer {
 				"<line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"9940\" marker-end=\"url(#triangle)\" stroke=\"black\" stroke-width=\"20\"/>\n");
 		// Description of y-Axis
 		bw.write("<circle cx=\"0\" cy=\"10000\" r=\"40\" stroke=\"black\" stroke-width=\"20\" fill=\"none\" />\n");
-		bw.write("<text x=\"40\" y=\"-9900\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: "
+		bw.write("<text class=\"NoHover\" x=\"40\" y=\"-9900\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: "
 				+ (lat + 1) + "</text>\n");
 
 		// Description of 0-Point
 		bw.write("<circle cx=\"0\" cy=\"0\" r=\"40\" stroke=\"black\" stroke-width=\"20\" fill=\"none\" />\n");
-		bw.write("<text x=\"40\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + lat
+		bw.write("<text class=\"NoHover\" x=\"40\" y=\"-20\" font-size=\"100\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + lat
 				+ "</text>\n");
 
 		// ledger lines for coordinate system
@@ -74,13 +74,13 @@ public class SvgVisualizer {
 
 			bw.write("<line x1=\"" + i + "\" y1=\"0\" x2=\"" + i
 					+ "\" y2=\"10000\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
-			bw.write("<text x=\"" + (i - 15) + "\" y=\"-10\" transform=\"scale(1, -1)\" "
+			bw.write("<text class=\"NoHover\" x=\"" + (i - 15) + "\" y=\"-10\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"6\" text-anchor=\"middle\"> Lon: " + lonInfo + "</text>\n");
 			lonInfo = round(lonInfo + 0.01, 2);
 
 			bw.write("<line x1=\"0\" y1=\"" + i + "\" x2=\"10000\" y2=\"" + i
 					+ "\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
-			bw.write("<text x=\"25\" y=\"" + -(i - 5) + "\" transform=\"scale(1, -1)\" "
+			bw.write("<text class=\"NoHover\" x=\"25\" y=\"" + -(i - 5) + "\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"6\" text-anchor=\"middle\"> Lat: " + latInfo + "</text>\n");
 			latInfo = round(latInfo + 0.01, 2);
 		}

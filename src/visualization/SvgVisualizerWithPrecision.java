@@ -51,17 +51,17 @@ public class SvgVisualizerWithPrecision {
 		bw.write("<line x1=\"0\" y1=\"0\" x2=\"" + scaleNumber(9940, precision) + "\" y2=\"0\" marker-end=\"url(#triangle)\" stroke=\"black\" stroke-width=\"" + 20 + "\"/>\n");
 		//Description of x-Axis
 		bw.write("<circle cx=\"" + precision + "\" cy=\"0\" r=\"" + scaleNumber(40, precision) + "\" stroke=\"black\" stroke-width=\"" + 20 + "\" fill=\"none\" />\n");
-		bw.write("<text x=\"" + scaleNumber(9150, precision) + "\" y=\""+ scaleNumber(-20, precision) +"\" font-size=\"" + 100 + "\" transform=\"scale(1, -1)\" > Lon: " + (lon+1) + " Lat: " + lat + "</text>\n");
+		bw.write("<text class=\"NoHover\" x=\"" + scaleNumber(9150, precision) + "\" y=\""+ scaleNumber(-20, precision) +"\" font-size=\"" + 100 + "\" transform=\"scale(1, -1)\" > Lon: " + (lon+1) + " Lat: " + lat + "</text>\n");
 		
 		//yAxis
 		bw.write("<line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"" + scaleNumber(9940, precision) + "\" marker-end=\"url(#triangle)\" stroke=\"black\" stroke-width=\"" + 20 + "\"/>\n");
 		//Description of y-Axis
 		bw.write("<circle cx=\"0\" cy=\"" + precision + "\" r=\"" + scaleNumber(40, precision) + "\" stroke=\"black\" stroke-width=\"" + 20 + "\" fill=\"none\" />\n");
-		bw.write("<text x=\"" + scaleNumber(40, precision) + "\" y=\"" + scaleNumber(-9900, precision) + "\" font-size=\"" + 100 + "\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + (lat+1) + "</text>\n");
+		bw.write("<text class=\"NoHover\" x=\"" + scaleNumber(40, precision) + "\" y=\"" + scaleNumber(-9900, precision) + "\" font-size=\"" + 100 + "\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + (lat+1) + "</text>\n");
 		
 		//Description of 0-Point
 		bw.write("<circle cx=\"0\" cy=\"0\" r=\"" + scaleNumber(40, precision) + "\" stroke=\"black\" stroke-width=\"" + 20 + "\" fill=\"none\" />\n");
-		bw.write("<text x=\"" + scaleNumber(40, precision) + "\" y=\""+scaleNumber(-20, precision)+"\" font-size=\"" + 100 + "\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + lat + "</text>\n");
+		bw.write("<text class=\"NoHover\" x=\"" + scaleNumber(40, precision) + "\" y=\""+scaleNumber(-20, precision)+"\" font-size=\"" + 100 + "\" transform=\"scale(1, -1)\" > Lon: " + lon + " Lat: " + lat + "</text>\n");
 		
 		//ledger lines for coordinate system
 		double infoCounter = getInfoCounter(precision);
@@ -70,12 +70,12 @@ public class SvgVisualizerWithPrecision {
 		for(int i = 100; i <= precision; i+=100) {
 
 			bw.write("<line x1=\"" + i + "\" y1=\"0\" x2=\"" + i + "\" y2=\"" + precision + "\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
-			bw.write("<text x=\"" + (i-15) + "\" y=\"" + (-10) + "\" transform=\"scale(1, -1)\" "
+			bw.write("<text class=\"NoHover\" x=\"" + (i-15) + "\" y=\"" + (-10) + "\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"" + 6 + "\" text-anchor=\"middle\"> Lon: " + lonInfo + "</text>\n");
 			lonInfo = round(lonInfo + infoCounter, getDecimalDigits(infoCounter));
 			
 			bw.write("<line x1=\"0\" y1=\"" + i + "\" x2=\"" + precision + "\" y2=\"" + i + "\" stroke=\"black\" stroke-width=\"1\" stroke-dasharray=\"5\"/>\n");
-			bw.write("<text x=\"" + 25 + "\" y=\"" + -(i-5) + "\" transform=\"scale(1, -1)\" "
+			bw.write("<text class=\"NoHover\" x=\"" + 25 + "\" y=\"" + -(i-5) + "\" transform=\"scale(1, -1)\" "
 					+ "font-size=\"" + 6 + "\" text-anchor=\"middle\"> Lat: " + latInfo + "</text>\n");
 			latInfo = round(latInfo + infoCounter, getDecimalDigits(infoCounter));
 		}

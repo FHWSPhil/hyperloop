@@ -2,6 +2,9 @@ svg text {
 	opacity:0;
 }
 
+svg text.NoHover {
+	opacity:1;
+}
 
 svg g:hover text {
 	opacity:1;
