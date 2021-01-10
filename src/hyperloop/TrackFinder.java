@@ -10,14 +10,10 @@ public class TrackFinder {
 	
 	/**
 	 * 
-	 * @param points
-	 * 		List of all Coordinates
-	 * @param tolerance
-	 * 		determines the tolerance range of the line
-	 * @return
-	 * 		return a Track, that has the most nodes on the line
+	 * @param points as List of all Coordinates
+	 * @param tolerance determines the tolerance range of the line
+	 * @return a Track, that has the most nodes on the line
 	 */
-	
 	public static Track findOptimalTrack(List<Coordinate> points, double tolerance){
         Track optimalTrack = null;
         for(int i=0; i<points.size()-1; i++){

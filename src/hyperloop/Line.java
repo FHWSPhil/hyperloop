@@ -14,18 +14,21 @@ public class Line {
     private final Optional<Double> yIntercept;
     private final Optional<Double> xIntercept;
    
-    
-
+    //Constructor
     public Line(Coordinate p1, Coordinate p2){
     	this.firstOriginPoint = p1;
     	this.secondOriginPoint = p2;
         this.slope = calculateSlope(p1, p2);
         this.yIntercept = evaluateYIntercept(p1, this.slope);
         this.xIntercept = evaluateXIntercept(p1, this.slope);
-       
     }
 
-    //slope formula
+    /**
+     * Calculate slope of p1 and p2
+     * @param p1 coordinate1
+     * @param p2 coordinate2
+     * @return slope
+     */
     private double calculateSlope(Coordinate p1, Coordinate p2){
         double slope = Double.POSITIVE_INFINITY;
         double diffX = Math.abs(p1.getX() - p2.getX());
@@ -34,11 +37,23 @@ public class Line {
         return slope;
     }
 
-    private Optional<Double> evaluateYIntercept(Coordinate p, double slope){   //calculate Y-Intercept, if the X-Difference are not equal to zero
+    /**
+     * Calculates Y-Intercept, if the X-Difference is not equal to zero.
+     * @param p
+     * @param slope
+     * @return YIntercept
+     */
+    private Optional<Double> evaluateYIntercept(Coordinate p, double slope){   //
         return (slope == Double.POSITIVE_INFINITY) ? Optional.empty() : Optional.of(p.getY() - slope * p.getX()); 
     }
 
-    private Optional<Double> evaluateXIntercept(Coordinate p, double slope){ //if the straight line is parallel to the y-Axis
+    /**
+     * Calculates X-Intercept, if the straight line is parallel to the y-Axis.
+     * @param p
+     * @param slope
+     * @return XIntercept
+     */
+    private Optional<Double> evaluateXIntercept(Coordinate p, double slope){ //
         return (slope == Double.POSITIVE_INFINITY) ? Optional.of(p.getX()) : Optional.empty();
     }
 
@@ -62,13 +77,16 @@ public class Line {
     	return this.secondOriginPoint;
     }
     
-     public List<Coordinate> getPointOfOrigin(){
+    /**
+     * Simply adds start- and end-point to a list and return it.
+     * @return List with the Start- and End-points.
+     */
+    public List<Coordinate> getPointOfOrigin(){
         List<Coordinate> points = new LinkedList<Coordinate>();
         points.add(this.firstOriginPoint);
         points.add(this.secondOriginPoint);
         return points;
     }
-    
     
     @Override
     public String toString() {

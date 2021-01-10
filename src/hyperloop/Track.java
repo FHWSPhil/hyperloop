@@ -20,6 +20,12 @@ public class Track {
         return isAdded;
     }
     
+    /**
+     * Returns whether the point is on the track.
+     * @param p Point to proof.
+     * @param tolerance
+     * @return boolean
+     */
     public boolean isOnTrack(Coordinate p, double tolerance){
         
     	boolean position = false;
