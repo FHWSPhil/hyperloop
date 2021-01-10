@@ -35,19 +35,18 @@ public class TrackFinder {
     }
 	
 	//testing
-	//TODO Comment this, when project is final.
-	public static void main(String[] args) throws IOException {
-		List<Coordinate> points1 = CoordinateReader.readCoordinates("vbb_neo4j.csv");
-
-    	double tolerance = 0.005; 
-		Track optimalTrack = TrackFinder.findOptimalTrack(points1, tolerance);
-        System.out.println("Geradengleichung:");
-        System.out.println(optimalTrack.getLine());
-        System.out.println();
-        System.out.println("Ursprungspunkte:");
-        System.out.println(optimalTrack.getLine().getPointOfOrigin());
-        System.out.println();
-        System.out.println("Knoten auf der Geraden:");
-        System.out.println(optimalTrack.getPoints());
-	}
+//	public static void main(String[] args) throws IOException {
+//		List<Coordinate> points1 = CoordinateReader.readCoordinates("vbb_neo4j.csv");
+//
+//    	double tolerance = 0.005; 
+//		Track optimalTrack = TrackFinder.findOptimalTrack(points1, tolerance);
+//        System.out.println("Geradengleichung:");
+//        System.out.println(optimalTrack.getLine());
+//        System.out.println();
+//        System.out.println("Ursprungspunkte:");
+//        System.out.println(optimalTrack.getLine().getPointOfOrigin());
+//        System.out.println();
+//        System.out.println("Knoten auf der Geraden:");
+//        System.out.println(optimalTrack.getPoints());
+//	}
 }

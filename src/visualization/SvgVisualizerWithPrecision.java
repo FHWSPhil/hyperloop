@@ -148,19 +148,18 @@ public class SvgVisualizerWithPrecision {
 	}
 	
 	//testing
-	//TODO Comment this, when project is final.
-	public static void main(String[] args) throws IOException {
-		
-		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
-		
-		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
-		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
-		visualizeWithHTML(start, end, coordinates, 0.005, 4);
-		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
-		end = new Coordinate(2, "End", "EndDistrict", 52.99999, 13.99999);
-		visualizeWithHTML(start, end, coordinates, 0.005, 5);
-		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
-		end = new Coordinate(2, "End", "EndDistrict", 152.999999, 13.999999);
-		visualizeWithHTML(start, end, coordinates, 0.005, 6);
-	}
+//	public static void main(String[] args) throws IOException {
+//		
+//		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
+//		
+//		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+//		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
+//		visualizeWithHTML(start, end, coordinates, 0.005, 4);
+//		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+//		end = new Coordinate(2, "End", "EndDistrict", 52.99999, 13.99999);
+//		visualizeWithHTML(start, end, coordinates, 0.005, 5);
+//		start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+//		end = new Coordinate(2, "End", "EndDistrict", 152.999999, 13.999999);
+//		visualizeWithHTML(start, end, coordinates, 0.005, 6);
+//	}
 }

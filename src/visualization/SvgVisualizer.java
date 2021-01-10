@@ -135,13 +135,12 @@ public class SvgVisualizer {
 	}
 
 	// testing
-	// TODO Comment this, when project is final.
-	public static void main(String[] args) throws IOException {
-		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
-		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
-
-		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
-
-		visualizeWithHTML(start, end, coordinates, 0.005);
-	}
+//	public static void main(String[] args) throws IOException {
+//		Coordinate start = new Coordinate(1, "StartStation", "StartDistrict", 52.0, 13.0);
+//		Coordinate end = new Coordinate(2, "End", "EndDistrict", 52.9999, 13.9999);
+//
+//		List<Coordinate> coordinates = CoordinateReader.readCoordinates("vbb_neo4j.csv");
+//
+//		visualizeWithHTML(start, end, coordinates, 0.005);
+//	}
 }
